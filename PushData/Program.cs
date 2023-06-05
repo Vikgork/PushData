@@ -20,6 +20,8 @@ namespace PushData {
         public string CountryBorn { get; set; }
         public string Breeder { get; set; }
         public int Ownerid { get; set; }
+        public string Information { get; set; }
+        public int CreatorId { get; set; }
         public string CurrentCountry { get; set; }
         [NotMapped]
         public List<HorseShort> Progeny { get; set; }
@@ -89,16 +91,18 @@ namespace PushData {
                 HorseShort horse = new HorseShort()
                 {
                     //  mid fid  
-                    Id= i+1,
+                    Id = i + 1,
                     Name = GenerateName(),
-                    Breed= GenerateBreed(),
-                    Sex=GenerateSex(),
-                    Suit=GenerateSuit(),
-                    BookNumber=GenerateBookNumber(),
-                    CountryBorn=GenerateCountryBorn(),
-                    CurrentCountry=GenerateCountryBorn(),
-                    Date=GenerateDate(),
-                    Height=GenerateHeight(),
+                    Breed = GenerateBreed(),
+                    Sex = GenerateSex(),
+                    Suit = GenerateSuit(),
+                    BookNumber = GenerateBookNumber(),
+                    CountryBorn = GenerateCountryBorn(),
+                    CurrentCountry = GenerateCountryBorn(),
+                    Date = GenerateDate(),
+                    Height = GenerateHeight(),
+                    CreatorId = 0,
+                    Ownerid = 0
                 };
                 horse.Mid = GenerateMom();
                 horse.Fid = GenerateFather();
@@ -192,8 +196,7 @@ namespace PushData {
     class Program {
         public static void Main()
         {
-            try
-            {
+           
                 Console.WriteLine("Enter path to DB:");
                 string path = Console.ReadLine();
                 Console.WriteLine("Eneter count of Horse:");
@@ -227,12 +230,7 @@ namespace PushData {
                 db.SaveChanges();
                 Console.WriteLine("DB Savechange");
                 Console.WriteLine("Succes");
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
+          
             Console.ReadKey();
         }
 
